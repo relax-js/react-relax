@@ -21,16 +21,8 @@ const webpack = {
             },
             {
                 test: /\.js$/,
-                exclude: ['node_modules'],
+                exclude: /node_modules/,
                 loader: 'babel-loader',
-            },
-            {
-                /** Globals */
-                test: /(\.css)$/,
-                use: [
-                    'style-loader',
-                    'css-loader',
-                ],
             },
             {
                 test: /(\.less)$/,
@@ -42,13 +34,9 @@ const webpack = {
             },
         ],
     },
-    externals: {
-        // Don't bundle react
-        react: {
-            commonjs: 'react',
-            commonjs2: 'react',
-            amd: 'React',
-            root: 'React',
+    resolve: {
+        alias: {
+            '@relax-js/react-relax': path.resolve('dist', path.basename(app.main)),
         },
     },
     node: {

@@ -4,7 +4,7 @@ import Context from './context';
 const mapDispatchToProps = (store, actions) => (
     Object.keys(actions || {}).reduce((accum, key) => ({
         ...accum,
-        [key]: (...args) => connectDispatch(store, actions[key](...args)),
+        [key]: (...args) => store.dispatch(actions[key](...args)),
     }), {})
 );
 
@@ -17,7 +17,7 @@ const connect = function connect(stateToProps, actions) {
 
                     const state = store.getState();
                     mappedProps = {
-                        dispatch: actionParams(store, connectDispatch).dispatch,
+                        dispatch: store.dispatch,
                         ...(stateToProps && stateToProps(state, props)),
                         ...mapDispatchToProps(store, actions),
                         ...props,

@@ -1,23 +1,29 @@
 {
-    "name": "relax-js/relax",
+    "name": "@relax-js/react-relax",
     "version": "0.0.1",
-    "description": "Extremely Simple and Flexible JavaScript State Management Library",
-    "main": "dist/bundle.min.js",
+    "description": "Official React bindings for Relax",
+    "main": "dist/react-relax.min.js",
     "scripts": {
+        "start": "export NODE_ENV=development; ./scripts/run.dev.js",
         "dev": "webpack --watch --mode=development",
         "build": "export NODE_ENV=production; webpack --progress --optimize-minimize --mode=production",
-        "prepublishOnly": "rm -rf ./dist && yarn build",
+        "app:dev": "webpack-dev-server --open --mode='development' --hotOnly --config app/webpack.config.js",
+        "app:build": "yarn build --config app/webpack.config.js",
+        "prepublish": "rm -rf ./dist && yarn build",
         "test": "jest --watch --config=jest.config.json"
     },
     "author": "Jason McNeal",
     "license": "MIT",
     "peerDependencies": {
+        "@relax-js/react-relax": "latest",
         "react": ">=16.3.0"
     },
     "devDependencies": {
         "@babel/core": "^7.0.1",
-        "@babel/plugin-proposal-class-properties": "^7.0.0",
+        "@babel/plugin-proposal-class-properties": "^7.1.0",
         "@babel/preset-env": "^7.0.0",
+        "@babel/preset-react": "^7.0.0",
+        "@relax-js/relax": "^0.0.2",
         "babel-core": "^7.0.0-bridge.0",
         "babel-eslint": "^9.0.0",
         "babel-jest": "^23.6.0",
@@ -28,8 +34,16 @@
         "eslint-loader": "^2.1.0",
         "eslint-plugin-babel": "^5.2.0",
         "eslint-plugin-import": "^2.14.0",
+        "eslint-plugin-react": "^7.11.1",
         "jest": "^23.6.0",
+        "less": "^3.8.1",
+        "less-loader": "^4.1.0",
+        "react": "^16.5.2",
+        "react-dom": "^16.5.2",
+        "react-hot-loader": "^4.3.11",
+        "style-loader": "^0.23.1",
         "webpack": "^4.18.1",
-        "webpack-cli": "^3.1.0"
+        "webpack-cli": "^3.1.0",
+        "webpack-dev-server": "^3.1.9"
     }
 }

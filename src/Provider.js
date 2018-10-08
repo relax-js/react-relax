@@ -23,9 +23,7 @@ class Provider extends Component {
                 store: {
                     ...this.state.store,
                 },
-                storeState: params.response,
-            }, () => {
-                store.callSubscribers(params);
+                storeState: store.getState(),
             });
 
             return params;
