@@ -18,6 +18,18 @@
         "@relax-js/react-relax": "latest",
         "react": ">=16.3.0"
     },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/relax-js/react-relax"
+    },
+    "keywords": [
+        "relax",
+        "react-relax",
+        "state",
+        "management",
+        "promise",
+        "async"
+    ],
     "devDependencies": {
         "@babel/core": "^7.0.1",
         "@babel/plugin-proposal-class-properties": "^7.1.0",
