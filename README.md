@@ -1,4 +1,7 @@
 ### React Relax
+
+[![npm version](https://badge.fury.io/js/%40relax-js%2Freact-relax.svg)](https://badge.fury.io/js/%40relax-js%2Freact-relax)
+
 Use this library in conjunction with [Relax](https://github.com/relax-js/relax) to manage the state of your app. You will need to provide the Relax store to `Provider` and grab values from state with `connect`. These are explained below.
 
 #### Provider
@@ -41,7 +44,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(Count);
 ```
 `connect` accepts a function as it's first parameter which is provided the Relax `state` and is expected to return an object of props you construct.
 
-It accepts an object as the second parameter, which contains a key/value pair of your actions (I used ES6 shorthand in the example above). What this does is wrap each actions in `store.dispatch` so when your action is called the return value is routed through dispatch and updates the state.
+It accepts an object as the second parameter, which contains a key/value pair of your actions (I used ES6 shorthand in the example above). What this does is wrap each action in `store.dispatch` so when your action is called the return value is routed through dispatch and updates the state.
 
 The `Provider` is then updated with the new state and triggers a re-render to the child components. This is managed via React so a re-render will **only** happen when props have been updated for the child component.
 
