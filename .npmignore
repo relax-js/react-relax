@@ -18,3 +18,4 @@ webpack.config.js
 yarn.lock
 yarn*.log
 jest.config.json
+rollup.config.js
