@@ -9,6 +9,7 @@ const webpack = {
         filename: path.basename(app.main),
         libraryTarget: 'umd',
         umdNamedDefine: true,
+        globalObject: 'this',
     },
     module: {
         rules: [
