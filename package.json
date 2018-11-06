@@ -6,7 +6,7 @@
     "scripts": {
         "start": "export NODE_ENV=development; ./scripts/run.dev.js",
         "dev": "rollup --config rollup.config.js --watch",
-        "build": "rollup --config rollup.config.js --environment NODE_ENV:production",
+        "build": "export NODE_ENV=production; webpack --progress --optimize-minimize --mode=production",
         "app:dev": "webpack-dev-server --open --mode='development' --hotOnly --config app/webpack.config.js",
         "app:build": "yarn build --config app/webpack.config.js",
         "prepublish": "rm -rf ./dist && yarn build",
