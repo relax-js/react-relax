@@ -15,7 +15,6 @@
     "author": "Jason McNeal",
     "license": "MIT",
     "peerDependencies": {
-        "@relax-js/react-relax": "latest",
         "react": ">=16.3.0"
     },
     "repository": {
@@ -53,6 +52,7 @@
         "react": "^16.5.2",
         "react-dom": "^16.5.2",
         "react-hot-loader": "^4.3.11",
+        "reselect": "^4.0.0",
         "rollup": "^0.66.6",
         "rollup-plugin-babel": "^4.0.3",
         "rollup-plugin-eslint": "^5.0.0",
