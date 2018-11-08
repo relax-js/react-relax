@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { connect } from '@relax-js/react-relax';
+import { connect } from '../../dist/react-relax.min';
 
 import styles from './Todo.less';
 import { fetchList } from './actions';
+import { getList } from './selectors';
 
 const Todo = ({
     list,
@@ -35,7 +36,7 @@ Todo.defaultProps = {
 };
 
 const mapStateToProps = state => ({
-    list: state.list,
+    list: getList(state),
 });
 const mapDispatchToProps = {
     fetchList,
