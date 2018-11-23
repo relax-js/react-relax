@@ -24,24 +24,23 @@ const connect = function connect(stateToProps, actions) {
     return (Child) => {
         const Connect = props => (
             <Context.Consumer>
-                { (store) => {
+                { (provider) => {
+                    const { store } = provider;
                     const state = store.getState();
-                    // Dispatch doesn't change
-                    memory.dispatch = memory.dispatch || store.dispatch;
 
                     // Map Props
                     const newProps = {
                         ...(stateToProps && stateToProps(state, props)),
                         ...mapDispatchToProps(memory, store, actions),
                         ...props,
-                        dispatch: memory.dispatch,
+                        dispatch: store.dispatch,
                     };
 
                     // If props have changed, store current state and rerender component
                     if (!shallowEqual(memory.props, newProps)) {
                         memory.props = newProps;
                         memory.child = (
-                            <Child {...memory.props}/>
+                            <Child {...memory.props} />
                         );
                     }
 

@@ -7,32 +7,37 @@ class Provider extends Component {
         super(props);
 
         const { store } = props;
+
         this.state = {
             store: {
+                dispatch: (...args) => this.updateState(store.dispatch(...args)),
                 getState: store.getState,
-                dispatch: (...args) => this.updateState(store, store.dispatch(...args)),
                 subscribe: store.subscribe,
             },
             storeState: store.getState(),
         };
     }
 
-    updateState = (store, fn) => (
+    /**
+     * Callback to dispatch.
+     * Update state if changed.
+     * Expect promise which Relax should always return from dispatch
+     */
+    updateState = fn => (
         fn.then((params) => {
-            this.setState({
-                store: {
-                    ...this.state.store,
-                },
-                storeState: store.getState(),
-            });
+            if (this.state.storeState !== params.state) {
+                this.setState({
+                    storeState: params.state,
+                });
+            }
 
             return params;
         })
-    )
+    );
 
     render() {
         return (
-            <Context.Provider value={this.state.store}>
+            <Context.Provider value={this.state}>
                 { this.props.children }
             </Context.Provider>
         );

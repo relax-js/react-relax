@@ -1,5 +1,8 @@
+// "build": "export NODE_ENV=production; webpack --progress --optimize-minimize --mode=production",
 const path = require('path');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+
 const app = require('./package.json');
 
 const webpack = {
@@ -40,6 +43,12 @@ const webpack = {
             '@relax-js/react-relax': path.resolve('dist', path.basename(app.main)),
         },
     },
+    /** Don't bundle common dependencies */
+    externals: [
+        'prop-types',
+        'react-dom',
+        'react',
+    ],
     node: {
         Buffer: false,
     },
@@ -58,6 +67,7 @@ const webpack = {
                 },
             },
         }),
+        // new BundleAnalyzerPlugin(),
     ],
     stats: {
         builtAt: false,

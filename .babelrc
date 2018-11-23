@@ -1,9 +1,14 @@
 {
     "presets": [
-        "@babel/env",
-        "@babel/react"
+        "@babel/env"
     ],
+    "env": {
+        "production": {
+            "plugins": ["transform-react-remove-prop-types"]
+        }
+    },
     "plugins": [
+        "@babel/plugin-transform-react-jsx",
         "@babel/plugin-proposal-class-properties"
     ]
 }
