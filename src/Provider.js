@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Context from './context';
 
-class Provider extends Component {
+import RelaxContext from './context';
+
+class RelaxProvider extends Component {
     constructor(props) {
         super(props);
 
@@ -36,6 +37,8 @@ class Provider extends Component {
     );
 
     render() {
+        const Context = this.props.context || RelaxContext;
+
         return (
             <Context.Provider value={this.state}>
                 { this.props.children }
@@ -44,9 +47,10 @@ class Provider extends Component {
     }
 }
 
-Provider.propTypes = {
+RelaxProvider.propTypes = {
     children: PropTypes.node.isRequired,
+    context: PropTypes.object,
     store: PropTypes.object.isRequired,
 };
 
-export default Provider;
+export default RelaxProvider;

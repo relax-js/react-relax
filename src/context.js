@@ -1,5 +1,5 @@
 import { createContext } from 'react';
 
-const Context = createContext();
+const RelaxContext = createContext(null);
 
-export default Context;
+export default RelaxContext;

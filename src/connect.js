@@ -1,5 +1,6 @@
 import React from 'react';
-import Context from './context';
+
+import RelaxContext from './context';
 import shallowEqual from './utils/shallowEqual';
 
 const mapDispatchToProps = (memory, store, actions) => (
@@ -22,35 +23,42 @@ const connect = function connect(stateToProps, actions) {
     };
 
     return (Child) => {
-        const Connect = props => (
-            <Context.Consumer>
-                { (provider) => {
-                    const { store } = provider;
-                    const state = store.getState();
+        const Connect = ({
+            forwardedRef,
+            ...props
+        }) => {
+            const Context = props.context || RelaxContext;
 
-                    // Map Props
-                    const newProps = {
-                        ...(stateToProps && stateToProps(state, props)),
-                        ...mapDispatchToProps(memory, store, actions),
-                        ...props,
-                        dispatch: store.dispatch,
-                    };
+            return (
+                <Context.Consumer>
+                    { ({ store }) => {
+                        const state = store.getState();
 
-                    // If props have changed, store current state and rerender component
-                    if (!shallowEqual(memory.props, newProps)) {
-                        memory.props = newProps;
-                        memory.child = (
-                            <Child {...memory.props} />
-                        );
-                    }
+                        // Map Props
+                        const newProps = {
+                            ...(stateToProps && stateToProps(state, props)),
+                            ...mapDispatchToProps(memory, store, actions),
+                            ...props,
+                            dispatch: store.dispatch,
+                        };
 
-                    // Return child component - same or new
-                    return memory.child;
-                }}
-            </Context.Consumer>
-        );
+                        // If props have changed, store current state and rerender component
+                        if (!shallowEqual(memory.props, newProps)) {
+                            memory.props = newProps;
+                            memory.child = (
+                                <Child {...memory.props} ref={forwardedRef} />
+                            );
+                        }
 
-        return Connect;
+                        // Return child component - same or new
+                        return memory.child;
+                    }}
+                </Context.Consumer>
+            );
+        };
+
+        // Pass ref down to child
+        return React.forwardRef((props, ref) => <Connect {...props} forwardedRef={ref} />);
     };
 };
 
