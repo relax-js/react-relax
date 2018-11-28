@@ -23,10 +23,7 @@ const connect = function connect(stateToProps, actions) {
     };
 
     return (Child) => {
-        const Connect = ({
-            forwardedRef,
-            ...props
-        }) => {
+        const Connect = (props) => {
             const Context = props.context || RelaxContext;
 
             return (
@@ -46,7 +43,7 @@ const connect = function connect(stateToProps, actions) {
                         if (!shallowEqual(memory.props, newProps)) {
                             memory.props = newProps;
                             memory.child = (
-                                <Child {...memory.props} ref={forwardedRef} />
+                                <Child {...memory.props} />
                             );
                         }
 
@@ -57,8 +54,7 @@ const connect = function connect(stateToProps, actions) {
             );
         };
 
-        // Pass ref down to child
-        return React.forwardRef((props, ref) => <Connect {...props} forwardedRef={ref} />);
+        return Connect;
     };
 };
 
