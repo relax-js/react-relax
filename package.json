@@ -1,6 +1,6 @@
 {
     "name": "@relax-js/react-relax",
-    "version": "0.0.7",
+    "version": "0.0.8",
     "description": "Official React bindings for Relax",
     "main": "dist/react-relax.min.js",
     "scripts": {
